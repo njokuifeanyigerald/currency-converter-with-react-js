@@ -30,19 +30,12 @@ class CurrencyConverter extends Component{
             return;
         }
 
-        // if(this.cached[this.state.base]  !== undefined && Date.now() - this.cached[this.state.base].timestamp < 1000 * 60){
-        //     this.setState({
-        //         converted: this.cached[this.state.base].rates[this.state.other] * value
-        //     })
-        // }
+      
 
         fetch("https://api.exchangeratesapi.io/latest?base=USD")
             .then(response => response.json())
             .then(data => {
-                // this.cached[this.state.base] = {
-                //     rates: data.rates ,
-                //     timestamp: Date.now()
-                // };
+               
                 this.setState({
                     converted: data.rates[this.state.other] * value
                 });
