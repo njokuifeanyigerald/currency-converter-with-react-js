@@ -47,4 +47,19 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.G_TOKEN }}
         
-         
+    - name: Build and push Docker images
+      # You may pin to the exact commit or the version.
+      # uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+      uses: docker/build-push-action@v4.0.0
+      with:
+        # Build's context is the set of files located in the specified PATH or URL
+        context: ./
+        # List of tags and should be in lowercase
+        tags: |
+            bopgeek/gitops01:${{ github.sha }} 
+            ghcr.io/njokuifeanyigerald/gitops01:${{ github.sha }}
+                
+        # build on feature branches, push only on main branch
+        push: ${{ github.ref == 'refs/heads/master' }}
+
+   
